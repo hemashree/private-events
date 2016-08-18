@@ -13,5 +13,7 @@
  *
  *= require_tree .
  *= require_bootstrap.min
+ *= require_overide_bootstrap
+ *= require_custom
  *= require_self
  */

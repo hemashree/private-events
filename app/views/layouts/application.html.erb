@@ -7,8 +7,32 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<nav class="navbar navbar-inverse">
-</nav>
+  <nav class="navbar navbar-inverse header-style">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">PrivateEvents</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <% unless current_user.present? %>
+            <%= form_for :user, :url => users_path, :method => :post, :html => { :class => "navbar-form navbar-right"} do |f| %>
+              <%= f.text_field :name, :class => "form-control", :placeholder => "Name" %>
+              <%= f.submit "Sign in", :class => "btn btn-success " %>
+            <% end %>
+          <% else %>
+            <div class= "navbar-right">
+              <span class="name"><%= current_user.name.capitalize %></span> &nbsp;
+              <%= link_to "Sign out", users_path, :method => :delete, :class => "btn btn-success " %>
+            </div>
+          <% end %>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
 <div class="container">
 <%= yield %>
 </div>
